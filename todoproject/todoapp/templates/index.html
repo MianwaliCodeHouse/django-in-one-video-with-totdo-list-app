@@ -1,0 +1,36 @@
+{% extends 'todoapp/base.html' %} {% block title %}Todo List{% endblock %}
+
+<!-- start block  -->
+{% block content %}
+<h1>Todo List</h1>
+<div class="text-right">
+  <a class="btn btn-primary mb-3" href="{% url 'add_todo' %}">Add Todo</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th style="width: 200px">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for todo in todos %}
+    <tr>
+      <td>{{ todo.title }}</td>
+      <td>{{ todo.description }}</td>
+      <td>{{ todo.completed|yesno:"Yes,No" }}</td>
+      <td>
+        <a class="btn btn-warning btn-sm" href="{% url 'edit_todo' todo.pk %}"
+          >Edit</a
+        >
+        <a class="btn btn-danger btn-sm" href="{% url 'delete_todo' todo.pk %}"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
